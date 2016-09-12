@@ -12,15 +12,23 @@ import com.abhi.models._
 
 object ScalaHttpTest extends App {
 
-  def method1() : Unit = {
+  def uploadFile() : Unit = {
+
+  }
+
+  def listDirectory() : Unit = {
+    def onlyDirectory : PartialFunction[FileStatusArray, String] = {
+      case x if (x.`type` == "DIRECTORY") => x.pathSuffix
+    }
+
     val c = PooledHttp1Client()
     val task = c.expect[FileStatuses]("""http://127.0.0.1:50070/webhdfs/v1/user/?op=LISTSTATUS""")
     val result = task.run
-    println(result)
+    println(result.fileStatus.fileStatusArray.collect(onlyDirectory))
 //    val x = FileStatuses(FileStatus(fileStatusArray = List(FileStatusArray(), FileStatusArray())))
 //    println(x.asJson)
     c.shutdownNow()
   }
 
-  method1()
+  listDirectory()
 }
