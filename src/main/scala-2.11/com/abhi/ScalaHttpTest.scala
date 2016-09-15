@@ -4,9 +4,8 @@ package com.abhi
   * Created by abhishek on 9/10/16.
   */
 import argonaut._
-import Argonaut._
 import org.http4s.client.blaze.PooledHttp1Client
-import org.http4s.{EntityDecoder, EntityEncoder, UrlForm}
+import org.http4s.{UrlForm}
 import org.http4s.argonaut._
 import com.abhi.models._
 import org.http4s.dsl._
